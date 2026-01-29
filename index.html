@@ -355,6 +355,9 @@
             font-weight: 600;
             white-space: nowrap;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .tool-item:hover {
@@ -552,10 +555,26 @@
         }
         
         .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            display: flex;
             gap: 24px;
             margin-top: 32px;
+            overflow-x: auto;
+            padding-bottom: 20px;
+            scroll-behavior: smooth;
+        }
+        
+        .gallery-grid::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .gallery-grid::-webkit-scrollbar-track {
+            background: rgba(43, 43, 43, 0.4);
+            border-radius: 4px;
+        }
+        
+        .gallery-grid::-webkit-scrollbar-thumb {
+            background: var(--primary-orange);
+            border-radius: 4px;
         }
         
         .gallery-item {
@@ -568,7 +587,9 @@
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            aspect-ratio: 1;
+            flex-shrink: 0;
+            width: 320px;
+            height: 320px;
         }
         
         .gallery-item.hidden {
@@ -827,7 +848,7 @@
     <div class="flex flex-col md:flex-row items-center gap-12">
      <div class="profile-photo">
       <div class="profile-photo-inner" id="profilePhotoContainer"><img id="profileImage" src="" alt="Profile Photo" class="hidden w-full h-full object-cover rounded-full" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.display='none'; document.getElementById('profilePlaceholder').style.display='flex';">
-       <svg id="profilePlaceholder" width="100" height="100" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path> <circle cx="12" cy="7" r="4"></circle>
+       <svg id="profilePlaceholder" width="100" height="100" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /> <circle cx="12" cy="7" r="4" />
        </svg>
       </div>
      </div>
@@ -837,7 +858,7 @@
       <h2 id="heroTitle" class="text-xl md:text-2xl mb-6" style="color: var(--electric-blue);">Operations &amp; Project Management Executive</h2>
       <p id="heroTagline" class="text-lg md:text-xl text-gray-400 mb-8 max-w-2xl">"Building Projects. Driving Operations. Delivering Results."</p>
       <div class="hero-buttons flex flex-wrap gap-4"><button class="glow-btn glow-btn-primary"> <span class="flex items-center gap-2">
-         <svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path> <polyline points="7,10 12,15 17,10"></polyline> <line x1="12" y1="15" x2="12" y2="3"></line>
+         <svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /> <polyline points="7,10 12,15 17,10"></polyline> <line x1="12" y1="15" x2="12" y2="3"></line>
          </svg> Download CV </span> </button> <a href="#contact" class="glow-btn glow-btn-secondary">Contact Me</a>
       </div>
      </div>
@@ -859,15 +880,15 @@
       <p id="aboutText" class="text-lg md:text-xl leading-relaxed text-gray-300">Operations &amp; Project Management Executive with hands-on experience in construction and industrial service projects. Expertise in project coordination, quotation &amp; billing control, procurement, vendor management, manpower deployment, and plant safety compliance. Proven ability to balance operational efficiency with strict safety execution.</p>
       <div class="mt-8 flex flex-wrap gap-4">
        <div class="flex items-center gap-3 px-4 py-2 rounded-full" style="background: rgba(255, 106, 0, 0.1); border: 1px solid rgba(255, 106, 0, 0.3);">
-        <svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="var(--primary-orange)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path> <polyline points="22,4 12,14.01 9,11.01"></polyline>
+        <svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="var(--primary-orange)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /> <polyline points="22,4 12,14.01 9,11.01"></polyline>
         </svg><span style="color: var(--primary-orange);">Project Execution</span>
        </div>
        <div class="flex items-center gap-3 px-4 py-2 rounded-full" style="background: rgba(0, 163, 255, 0.1); border: 1px solid rgba(0, 163, 255, 0.3);">
-        <svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="var(--electric-blue)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path> <polyline points="22,4 12,14.01 9,11.01"></polyline>
+        <svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="var(--electric-blue)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /> <polyline points="22,4 12,14.01 9,11.01"></polyline>
         </svg><span style="color: var(--electric-blue);">Safety Compliance</span>
        </div>
        <div class="flex items-center gap-3 px-4 py-2 rounded-full" style="background: rgba(255, 106, 0, 0.1); border: 1px solid rgba(255, 106, 0, 0.3);">
-        <svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="var(--primary-orange)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path> <polyline points="22,4 12,14.01 9,11.01"></polyline>
+        <svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="var(--primary-orange)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /> <polyline points="22,4 12,14.01 9,11.01"></polyline>
         </svg><span style="color: var(--primary-orange);">Cost Control</span>
        </div>
       </div>
@@ -883,7 +904,7 @@
      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"><!-- Skill Card 1 -->
       <div class="glass-card p-6">
        <div class="skill-icon">
-        <svg width="32" height="32" viewbox="0 0 24 24" fill="none" stroke="var(--primary-orange)" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect> <line x1="16" y1="2" x2="16" y2="6"></line> <line x1="8" y1="2" x2="8" y2="6"></line> <line x1="3" y1="10" x2="21" y2="10"></line>
+        <svg width="32" height="32" viewbox="0 0 24 24" fill="none" stroke="var(--primary-orange)" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /> <line x1="16" y1="2" x2="16" y2="6"></line> <line x1="8" y1="2" x2="8" y2="6"></line> <line x1="3" y1="10" x2="21" y2="10"></line>
         </svg>
        </div>
        <h3 class="text-xl font-bold mb-3">Project Planning</h3>
@@ -891,7 +912,7 @@
       </div><!-- Skill Card 2 -->
       <div class="glass-card p-6">
        <div class="skill-icon">
-        <svg width="32" height="32" viewbox="0 0 24 24" fill="none" stroke="var(--electric-blue)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        <svg width="32" height="32" viewbox="0 0 24 24" fill="none" stroke="var(--electric-blue)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
         </svg>
        </div>
        <h3 class="text-xl font-bold mb-3">Site Safety Compliance</h3>
@@ -899,7 +920,7 @@
       </div><!-- Skill Card 3 -->
       <div class="glass-card p-6">
        <div class="skill-icon">
-        <svg width="32" height="32" viewbox="0 0 24 24" fill="none" stroke="var(--primary-orange)" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path> <line x1="3" y1="6" x2="21" y2="6"></line> <path d="M16 10a4 4 0 0 1-8 0"></path>
+        <svg width="32" height="32" viewbox="0 0 24 24" fill="none" stroke="var(--primary-orange)" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" /> <line x1="3" y1="6" x2="21" y2="6"></line> <path d="M16 10a4 4 0 0 1-8 0" />
         </svg>
        </div>
        <h3 class="text-xl font-bold mb-3">Procurement &amp; Vendor</h3>
@@ -907,7 +928,7 @@
       </div><!-- Skill Card 4 -->
       <div class="glass-card p-6">
        <div class="skill-icon">
-        <svg width="32" height="32" viewbox="0 0 24 24" fill="none" stroke="var(--electric-blue)" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line> <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+        <svg width="32" height="32" viewbox="0 0 24 24" fill="none" stroke="var(--electric-blue)" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line> <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
         </svg>
        </div>
        <h3 class="text-xl font-bold mb-3">Billing &amp; Cost Control</h3>
@@ -915,7 +936,7 @@
       </div><!-- Skill Card 5 -->
       <div class="glass-card p-6">
        <div class="skill-icon">
-        <svg width="32" height="32" viewbox="0 0 24 24" fill="none" stroke="var(--primary-orange)" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path> <line x1="12" y1="9" x2="12" y2="13"></line> <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        <svg width="32" height="32" viewbox="0 0 24 24" fill="none" stroke="var(--primary-orange)" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /> <line x1="12" y1="9" x2="12" y2="13"></line> <line x1="12" y1="17" x2="12.01" y2="17"></line>
         </svg>
        </div>
        <h3 class="text-xl font-bold mb-3">Risk Assessment</h3>
@@ -923,7 +944,7 @@
       </div><!-- Skill Card 6 -->
       <div class="glass-card p-6">
        <div class="skill-icon">
-        <svg width="32" height="32" viewbox="0 0 24 24" fill="none" stroke="var(--electric-blue)" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path> <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
+        <svg width="32" height="32" viewbox="0 0 24 24" fill="none" stroke="var(--electric-blue)" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83" /> <path d="M22 12A10 10 0 0 0 12 2v10z" />
         </svg>
        </div>
        <h3 class="text-xl font-bold mb-3">Excel &amp; Power BI</h3>
@@ -951,25 +972,25 @@
         </div>
         <ul class="space-y-3 text-gray-300">
          <li class="flex items-start gap-3">
-          <svg class="flex-shrink-0 mt-1" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="var(--electric-blue)" stroke-width="2"><polyline points="9,11 12,14 22,4"></polyline> <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+          <svg class="flex-shrink-0 mt-1" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="var(--electric-blue)" stroke-width="2"><polyline points="9,11 12,14 22,4"></polyline> <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
           </svg><span>End-to-end project execution from quotation to final billing</span></li>
          <li class="flex items-start gap-3">
-          <svg class="flex-shrink-0 mt-1" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="var(--electric-blue)" stroke-width="2"><polyline points="9,11 12,14 22,4"></polyline> <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+          <svg class="flex-shrink-0 mt-1" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="var(--electric-blue)" stroke-width="2"><polyline points="9,11 12,14 22,4"></polyline> <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
           </svg><span>BOQ preparation, agreements &amp; billing documentation</span></li>
          <li class="flex items-start gap-3">
-          <svg class="flex-shrink-0 mt-1" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="var(--electric-blue)" stroke-width="2"><polyline points="9,11 12,14 22,4"></polyline> <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+          <svg class="flex-shrink-0 mt-1" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="var(--electric-blue)" stroke-width="2"><polyline points="9,11 12,14 22,4"></polyline> <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
           </svg><span>Site supervisor coordination &amp; manpower planning</span></li>
          <li class="flex items-start gap-3">
-          <svg class="flex-shrink-0 mt-1" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="var(--electric-blue)" stroke-width="2"><polyline points="9,11 12,14 22,4"></polyline> <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+          <svg class="flex-shrink-0 mt-1" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="var(--electric-blue)" stroke-width="2"><polyline points="9,11 12,14 22,4"></polyline> <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
           </svg><span>Procurement &amp; material tracking management</span></li>
          <li class="flex items-start gap-3">
-          <svg class="flex-shrink-0 mt-1" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="var(--electric-blue)" stroke-width="2"><polyline points="9,11 12,14 22,4"></polyline> <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+          <svg class="flex-shrink-0 mt-1" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="var(--electric-blue)" stroke-width="2"><polyline points="9,11 12,14 22,4"></polyline> <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
           </svg><span>Cost monitoring &amp; P&amp;L reporting</span></li>
          <li class="flex items-start gap-3">
-          <svg class="flex-shrink-0 mt-1" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="var(--electric-blue)" stroke-width="2"><polyline points="9,11 12,14 22,4"></polyline> <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+          <svg class="flex-shrink-0 mt-1" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="var(--electric-blue)" stroke-width="2"><polyline points="9,11 12,14 22,4"></polyline> <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
           </svg><span>Risk assessment &amp; PTW preparation</span></li>
          <li class="flex items-start gap-3">
-          <svg class="flex-shrink-0 mt-1" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="var(--electric-blue)" stroke-width="2"><polyline points="9,11 12,14 22,4"></polyline> <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+          <svg class="flex-shrink-0 mt-1" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="var(--electric-blue)" stroke-width="2"><polyline points="9,11 12,14 22,4"></polyline> <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
           </svg><span>Plant &amp; site safety compliance</span></li>
         </ul>
        </div>
@@ -983,87 +1004,89 @@
     <div class="reveal-section">
      <p class="text-sm uppercase tracking-widest mb-2" style="color: var(--primary-orange);">Credentials</p>
      <h2 class="section-title text-3xl md:text-4xl font-bold mb-12">Certifications</h2>
-     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"><!-- Cert 1 -->
-      <div class="cert-badge rounded-2xl overflow-hidden">
-       <div class="cert-badge-inner">
-        <div class="flex items-center gap-4 mb-4">
-         <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, var(--primary-orange), #ff8533);">
-          <svg width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="8" r="7"></circle> <polyline points="8.21,13.89 7,23 12,20 17,23 15.79,13.88"></polyline>
-          </svg>
-         </div>
-         <div>
-          <h4 class="font-bold">PSM</h4>
-          <p class="text-sm text-gray-400">Process Safety Management</p>
-         </div>
-        </div>
-       </div>
-      </div><!-- Cert 2 -->
-      <div class="cert-badge rounded-2xl overflow-hidden">
-       <div class="cert-badge-inner">
-        <div class="flex items-center gap-4 mb-4">
-         <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, var(--electric-blue), #33b5ff);">
-          <svg width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect> <line x1="3" y1="9" x2="21" y2="9"></line> <line x1="9" y1="21" x2="9" y2="9"></line>
-          </svg>
-         </div>
-         <div>
-          <h4 class="font-bold">Advanced Excel</h4>
-          <p class="text-sm text-gray-400">&amp; Cost Sheets</p>
+     <div class="overflow-x-auto pb-6">
+      <div class="flex gap-6" style="min-width: max-content;"><!-- Cert 1 -->
+       <div class="cert-badge rounded-2xl overflow-hidden" style="min-width: 280px;">
+        <div class="cert-badge-inner">
+         <div class="flex items-center gap-4 mb-4">
+          <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, var(--primary-orange), #ff8533);">
+           <svg width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="8" r="7" /> <polyline points="8.21,13.89 7,23 12,20 17,23 15.79,13.88"></polyline>
+           </svg>
+          </div>
+          <div>
+           <h4 class="font-bold">PSM</h4>
+           <p class="text-sm text-gray-400">Process Safety Management</p>
+          </div>
          </div>
         </div>
-       </div>
-      </div><!-- Cert 3 -->
-      <div class="cert-badge rounded-2xl overflow-hidden">
-       <div class="cert-badge-inner">
-        <div class="flex items-center gap-4 mb-4">
-         <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, var(--primary-orange), #ff8533);">
-          <svg width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path> <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
-          </svg>
-         </div>
-         <div>
-          <h4 class="font-bold">Power BI</h4>
-          <p class="text-sm text-gray-400">Dashboards</p>
-         </div>
-        </div>
-       </div>
-      </div><!-- Cert 4 -->
-      <div class="cert-badge rounded-2xl overflow-hidden">
-       <div class="cert-badge-inner">
-        <div class="flex items-center gap-4 mb-4">
-         <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, var(--electric-blue), #33b5ff);">
-          <svg width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path> <polyline points="14,2 14,8 20,8"></polyline> <line x1="16" y1="13" x2="8" y2="13"></line> <line x1="16" y1="17" x2="8" y2="17"></line>
-          </svg>
-         </div>
-         <div>
-          <h4 class="font-bold">Tally ERP</h4>
-          <p class="text-sm text-gray-400">&amp; GST</p>
+       </div><!-- Cert 2 -->
+       <div class="cert-badge rounded-2xl overflow-hidden" style="min-width: 280px;">
+        <div class="cert-badge-inner">
+         <div class="flex items-center gap-4 mb-4">
+          <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, var(--electric-blue), #33b5ff);">
+           <svg width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /> <line x1="3" y1="9" x2="21" y2="9"></line> <line x1="9" y1="21" x2="9" y2="9"></line>
+           </svg>
+          </div>
+          <div>
+           <h4 class="font-bold">Advanced Excel</h4>
+           <p class="text-sm text-gray-400">&amp; Cost Sheets</p>
+          </div>
          </div>
         </div>
-       </div>
-      </div><!-- Cert 5 -->
-      <div class="cert-badge rounded-2xl overflow-hidden">
-       <div class="cert-badge-inner">
-        <div class="flex items-center gap-4 mb-4">
-         <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, var(--primary-orange), #ff8533);">
-          <svg width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line>
-          </svg>
-         </div>
-         <div>
-          <h4 class="font-bold">ADCA Diploma</h4>
-          <p class="text-sm text-gray-400">Advanced Computer Applications</p>
+       </div><!-- Cert 3 -->
+       <div class="cert-badge rounded-2xl overflow-hidden" style="min-width: 280px;">
+        <div class="cert-badge-inner">
+         <div class="flex items-center gap-4 mb-4">
+          <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, var(--primary-orange), #ff8533);">
+           <svg width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83" /> <path d="M22 12A10 10 0 0 0 12 2v10z" />
+           </svg>
+          </div>
+          <div>
+           <h4 class="font-bold">Power BI</h4>
+           <p class="text-sm text-gray-400">Dashboards</p>
+          </div>
          </div>
         </div>
-       </div>
-      </div><!-- Cert 6 -->
-      <div class="cert-badge rounded-2xl overflow-hidden">
-       <div class="cert-badge-inner">
-        <div class="flex items-center gap-4 mb-4">
-         <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, #FFD700, #FFA500);">
-          <svg width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"></polygon>
-          </svg>
+       </div><!-- Cert 4 -->
+       <div class="cert-badge rounded-2xl overflow-hidden" style="min-width: 280px;">
+        <div class="cert-badge-inner">
+         <div class="flex items-center gap-4 mb-4">
+          <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, var(--electric-blue), #33b5ff);">
+           <svg width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /> <polyline points="14,2 14,8 20,8"></polyline> <line x1="16" y1="13" x2="8" y2="13"></line> <line x1="16" y1="17" x2="8" y2="17"></line>
+           </svg>
+          </div>
+          <div>
+           <h4 class="font-bold">Tally ERP</h4>
+           <p class="text-sm text-gray-400">&amp; GST</p>
+          </div>
          </div>
-         <div>
-          <h4 class="font-bold">Best Performance</h4>
-          <p class="text-sm text-gray-400">Award</p>
+        </div>
+       </div><!-- Cert 5 -->
+       <div class="cert-badge rounded-2xl overflow-hidden" style="min-width: 280px;">
+        <div class="cert-badge-inner">
+         <div class="flex items-center gap-4 mb-4">
+          <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, var(--primary-orange), #ff8533);">
+           <svg width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2" /> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line>
+           </svg>
+          </div>
+          <div>
+           <h4 class="font-bold">ADCA Diploma</h4>
+           <p class="text-sm text-gray-400">Advanced Computer Applications</p>
+          </div>
+         </div>
+        </div>
+       </div><!-- Cert 6 -->
+       <div class="cert-badge rounded-2xl overflow-hidden" style="min-width: 280px;">
+        <div class="cert-badge-inner">
+         <div class="flex items-center gap-4 mb-4">
+          <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, #FFD700, #FFA500);">
+           <svg width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"></polygon>
+           </svg>
+          </div>
+          <div>
+           <h4 class="font-bold">Best Performance</h4>
+           <p class="text-sm text-gray-400">Award</p>
+          </div>
          </div>
         </div>
        </div>
@@ -1082,58 +1105,88 @@
      <div class="overflow-hidden">
       <div class="tools-track">
        <div class="tool-item">
-        Excel
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" class="inline-block mr-2"><rect x="3" y="3" width="18" height="18" rx="2" fill="#1D6F42" /> <path d="M14 3v18M3 14h18" stroke="white" stroke-width="2" />
+        </svg> Microsoft Excel
        </div>
        <div class="tool-item">
-        Power BI
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" class="inline-block mr-2"><rect x="3" y="3" width="18" height="18" rx="2" fill="#F2C811" /> <circle cx="8" cy="8" r="2" fill="white" /> <path d="M16 8h2M16 12h2M16 16h2" stroke="white" stroke-width="1.5" />
+        </svg> Power BI
        </div>
        <div class="tool-item">
-        SQL
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" class="inline-block mr-2"><rect x="3" y="3" width="18" height="18" rx="2" fill="#00758F" /> <text x="12" y="16" text-anchor="middle" fill="white" font-size="10" font-weight="bold">
+          SQL
+         </text>
+        </svg> SQL
        </div>
        <div class="tool-item">
-        Tally
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" class="inline-block mr-2"><rect x="3" y="3" width="18" height="18" rx="2" fill="#D32F2F" /> <path d="M8 8h8M8 12h6M8 16h4" stroke="white" stroke-width="1.5" />
+        </svg> Tally
        </div>
        <div class="tool-item">
-        Zoho
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" class="inline-block mr-2"><rect x="3" y="3" width="18" height="18" rx="2" fill="#E42527" /> <text x="12" y="16" text-anchor="middle" fill="white" font-size="9" font-weight="bold">
+          Z
+         </text>
+        </svg> Zoho
        </div>
        <div class="tool-item">
-        Odoo
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" class="inline-block mr-2"><rect x="3" y="3" width="18" height="18" rx="2" fill="#714B67" /> <circle cx="12" cy="12" r="5" stroke="white" stroke-width="1.5" />
+        </svg> Odoo
        </div>
        <div class="tool-item">
-        SAP
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" class="inline-block mr-2"><rect x="3" y="3" width="18" height="18" rx="2" fill="#0FAAFF" /> <text x="12" y="16" text-anchor="middle" fill="white" font-size="8" font-weight="bold">
+          SAP
+         </text>
+        </svg> SAP
        </div>
        <div class="tool-item">
-        Oracle
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" class="inline-block mr-2"><rect x="3" y="3" width="18" height="18" rx="2" fill="#EA1B22" /> <rect x="8" y="8" width="8" height="8" rx="1" stroke="white" stroke-width="1.5" />
+        </svg> Oracle
        </div>
        <div class="tool-item">
-        Google Workspace
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" class="inline-block mr-2"><circle cx="8" cy="12" r="3" fill="#4285F4" /> <circle cx="12" cy="8" r="3" fill="#EA4335" /> <circle cx="16" cy="12" r="3" fill="#FBBC04" /> <circle cx="12" cy="16" r="3" fill="#34A853" />
+        </svg> Google Workspace
        </div>
        <div class="tool-item">
-        Excel
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" class="inline-block mr-2"><rect x="3" y="3" width="18" height="18" rx="2" fill="#0078D4" /> <path d="M8 8h8M8 12h8M8 16h5" stroke="white" stroke-width="1.5" />
+        </svg> MS Word
        </div>
        <div class="tool-item">
-        Power BI
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" class="inline-block mr-2"><rect x="3" y="3" width="18" height="18" rx="2" fill="#1D6F42" /> <path d="M14 3v18M3 14h18" stroke="white" stroke-width="2" />
+        </svg> Microsoft Excel
        </div>
        <div class="tool-item">
-        SQL
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" class="inline-block mr-2"><rect x="3" y="3" width="18" height="18" rx="2" fill="#F2C811" /> <circle cx="8" cy="8" r="2" fill="white" /> <path d="M16 8h2M16 12h2M16 16h2" stroke="white" stroke-width="1.5" />
+        </svg> Power BI
        </div>
        <div class="tool-item">
-        Tally
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" class="inline-block mr-2"><rect x="3" y="3" width="18" height="18" rx="2" fill="#00758F" /> <text x="12" y="16" text-anchor="middle" fill="white" font-size="10" font-weight="bold">
+          SQL
+         </text>
+        </svg> SQL
        </div>
        <div class="tool-item">
-        Zoho
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" class="inline-block mr-2"><rect x="3" y="3" width="18" height="18" rx="2" fill="#D32F2F" /> <path d="M8 8h8M8 12h6M8 16h4" stroke="white" stroke-width="1.5" />
+        </svg> Tally
        </div>
        <div class="tool-item">
-        Odoo
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" class="inline-block mr-2"><rect x="3" y="3" width="18" height="18" rx="2" fill="#E42527" /> <text x="12" y="16" text-anchor="middle" fill="white" font-size="9" font-weight="bold">
+          Z
+         </text>
+        </svg> Zoho
        </div>
        <div class="tool-item">
-        SAP
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" class="inline-block mr-2"><rect x="3" y="3" width="18" height="18" rx="2" fill="#714B67" /> <circle cx="12" cy="12" r="5" stroke="white" stroke-width="1.5" />
+        </svg> Odoo
        </div>
        <div class="tool-item">
-        Oracle
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" class="inline-block mr-2"><rect x="3" y="3" width="18" height="18" rx="2" fill="#0FAAFF" /> <text x="12" y="16" text-anchor="middle" fill="white" font-size="8" font-weight="bold">
+          SAP
+         </text>
+        </svg> SAP
        </div>
        <div class="tool-item">
-        Google Workspace
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" class="inline-block mr-2"><rect x="3" y="3" width="18" height="18" rx="2" fill="#EA1B22" /> <rect x="8" y="8" width="8" height="8" rx="1" stroke="white" stroke-width="1.5" />
+        </svg> Oracle
        </div>
       </div>
      </div>
@@ -1149,25 +1202,6 @@
      <div class="flex flex-wrap justify-center gap-4 mb-12"><button class="gallery-filter-btn active" data-filter="all">All</button> <button class="gallery-filter-btn" data-filter="projects">Projects</button> <button class="gallery-filter-btn" data-filter="awards">Awards</button> <button class="gallery-filter-btn" data-filter="certificates">Certificates</button>
      </div><!-- Gallery Grid -->
      <div class="gallery-grid" id="galleryGrid"><!-- Gallery items will be dynamically loaded here -->
-     </div><!-- Upload Section -->
-     <div class="mt-12 glass-card p-8">
-      <h3 class="text-2xl font-bold mb-6 text-center">Add Your Images</h3>
-      <div class="max-w-2xl mx-auto">
-       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-        <div><label for="imageUrl" class="block text-sm font-medium text-gray-400 mb-2">Image URL</label> <input type="url" id="imageUrl" class="form-input" placeholder="https://example.com/image.jpg">
-        </div>
-        <div><label for="imageCategory" class="block text-sm font-medium text-gray-400 mb-2">Category</label> <select id="imageCategory" class="form-input"> <option value="projects">Project</option> <option value="awards">Award</option> <option value="certificates">Certificate</option> </select>
-        </div>
-       </div>
-       <div class="mb-4"><label for="imageTitle" class="block text-sm font-medium text-gray-400 mb-2">Title</label> <input type="text" id="imageTitle" class="form-input" placeholder="Image title">
-       </div>
-       <div class="mb-4"><label for="imageDescription" class="block text-sm font-medium text-gray-400 mb-2">Description</label> <textarea id="imageDescription" rows="2" class="form-input resize-none" placeholder="Brief description"></textarea>
-       </div>
-       <div class="text-center"><button id="addImageBtn" class="glow-btn glow-btn-primary"> <span class="flex items-center gap-2">
-          <svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line> <line x1="5" y1="12" x2="19" y2="12"></line>
-          </svg> Add to Gallery </span> </button>
-       </div>
-      </div>
      </div>
     </div>
    </div>
@@ -1198,7 +1232,7 @@
       <div class="glass-card p-6 md:p-8">
        <div class="flex items-start gap-4">
         <div class="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0" style="background: linear-gradient(135deg, rgba(255, 106, 0, 0.2), rgba(0, 163, 255, 0.2));">
-         <svg width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="var(--primary-orange)" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+         <svg width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="var(--primary-orange)" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z" /> <path d="M6 12v5c3 3 9 3 12 0v-5" />
          </svg>
         </div>
         <div>
@@ -1210,7 +1244,7 @@
       <div class="glass-card p-6 md:p-8">
        <div class="flex items-start gap-4">
         <div class="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0" style="background: linear-gradient(135deg, rgba(255, 106, 0, 0.2), rgba(0, 163, 255, 0.2));">
-         <svg width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="var(--electric-blue)" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path> <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+         <svg width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="var(--electric-blue)" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /> <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
          </svg>
         </div>
         <div>
@@ -1266,11 +1300,11 @@
       <p class="text-gray-400 text-sm">Operations &amp; Project Management Executive</p>
      </div>
      <div class="flex items-center gap-4"><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
-       <svg width="22" height="22" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path> <rect x="2" y="9" width="4" height="12"></rect> <circle cx="4" cy="4" r="2"></circle>
+       <svg width="22" height="22" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /> <rect x="2" y="9" width="4" height="12" /> <circle cx="4" cy="4" r="2" />
        </svg></a> <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp">
-       <svg width="22" height="22" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+       <svg width="22" height="22" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
        </svg></a> <a href="mailto:contact@example.com" class="social-icon" aria-label="Email">
-       <svg width="22" height="22" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path> <polyline points="22,6 12,13 2,6"></polyline>
+       <svg width="22" height="22" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /> <polyline points="22,6 12,13 2,6"></polyline>
        </svg></a>
      </div>
     </div>
@@ -1469,7 +1503,7 @@
                             <circle cx="8.5" cy="8.5" r="1.5"></circle>
                             <polyline points="21,15 16,10 5,21"></polyline>
                         </svg>
-                        <p class="text-gray-400 text-lg">No images in gallery yet. Add your first image above!</p>
+                        <p class="text-gray-400 text-lg">No images in gallery yet.</p>
                     </div>
                 `;
                 return;
@@ -1570,69 +1604,6 @@
             openLightbox(currentLightboxIndex);
         }
         
-        // Gallery Event Listeners
-        document.getElementById('addImageBtn')?.addEventListener('click', () => {
-            const urlInput = document.getElementById('imageUrl');
-            const categoryInput = document.getElementById('imageCategory');
-            const titleInput = document.getElementById('imageTitle');
-            const descriptionInput = document.getElementById('imageDescription');
-            
-            const url = urlInput.value.trim();
-            const category = categoryInput.value;
-            const title = titleInput.value.trim();
-            const description = descriptionInput.value.trim();
-            
-            if (!url) {
-                const message = document.createElement('div');
-                message.className = 'text-center mt-4 p-3 rounded-lg';
-                message.style.background = 'rgba(220, 38, 38, 0.2)';
-                message.style.color = '#ef4444';
-                message.textContent = 'Please enter an image URL';
-                urlInput.parentElement.appendChild(message);
-                setTimeout(() => message.remove(), 3000);
-                return;
-            }
-            
-            if (!title) {
-                const message = document.createElement('div');
-                message.className = 'text-center mt-4 p-3 rounded-lg';
-                message.style.background = 'rgba(220, 38, 38, 0.2)';
-                message.style.color = '#ef4444';
-                message.textContent = 'Please enter a title';
-                titleInput.parentElement.appendChild(message);
-                setTimeout(() => message.remove(), 3000);
-                return;
-            }
-            
-            const newItem = {
-                url,
-                category,
-                title,
-                description: description || 'No description provided'
-            };
-            
-            galleryItems.push(newItem);
-            localStorage.setItem('galleryItems', JSON.stringify(galleryItems));
-            
-            urlInput.value = '';
-            titleInput.value = '';
-            descriptionInput.value = '';
-            
-            const successMessage = document.createElement('div');
-            successMessage.className = 'text-center mt-4 p-3 rounded-lg';
-            successMessage.style.background = 'rgba(255, 106, 0, 0.2)';
-            successMessage.style.color = 'var(--primary-orange)';
-            successMessage.textContent = 'Image added successfully!';
-            document.getElementById('addImageBtn').parentElement.appendChild(successMessage);
-            setTimeout(() => successMessage.remove(), 3000);
-            
-            renderGallery('all');
-            document.querySelectorAll('.gallery-filter-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.dataset.filter === 'all') btn.classList.add('active');
-            });
-        });
-        
         // Gallery Filter Buttons
         document.querySelectorAll('.gallery-filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -1676,5 +1647,5 @@
         updateUI();
         renderGallery();
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c59fc3191e11f0a',t:'MTc2OTcwMjg3NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c5a22aa408a1f0a',t:'MTc2OTcwNDQ1MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
