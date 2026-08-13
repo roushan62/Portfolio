@@ -1,6 +1,5 @@
 /* =====================================================================
-   Roushan Kumar Gupta — Portfolio v2
-   Vanilla JS. No dependencies, no network calls, no backend.
+   Roushan Kumar Gupta — Portfolio v3 · Glassmorphism Theme
    ===================================================================== */
 (function () {
   'use strict';
@@ -11,7 +10,27 @@
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-  /* ---------- Sticky header shadow ---------- */
+  /* ---------- Cursor glow ---------- */
+  var cursorGlow = document.getElementById('cursorGlow');
+  if (cursorGlow && !reduceMotion && window.innerWidth > 768) {
+    var mouseX = 0, mouseY = 0, glowX = 0, glowY = 0;
+    document.addEventListener('mousemove', function (e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+    function animateGlow() {
+      glowX += (mouseX - glowX) * 0.08;
+      glowY += (mouseY - glowY) * 0.08;
+      cursorGlow.style.left = glowX + 'px';
+      cursorGlow.style.top = glowY + 'px';
+      requestAnimationFrame(animateGlow);
+    }
+    animateGlow();
+  } else if (cursorGlow) {
+    cursorGlow.style.display = 'none';
+  }
+
+  /* ---------- Sticky header & back to top ---------- */
   var header = document.getElementById('siteHeader');
   var toTop = document.getElementById('toTop');
 
@@ -62,14 +81,13 @@
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
         var el = entry.target;
-        // Stagger siblings inside the same grid for a gentle cascade.
         var parent = el.parentElement;
         var idx = parent ? Array.prototype.indexOf.call(parent.children, el) : 0;
-        el.style.transitionDelay = Math.min(idx, 6) * 60 + 'ms';
+        el.style.transitionDelay = Math.min(idx, 8) * 70 + 'ms';
         el.classList.add('is-in');
         revealObserver.unobserve(el);
       });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
 
     revealEls.forEach(function (el) { revealObserver.observe(el); });
   }
@@ -95,33 +113,31 @@
         linkMap[id].classList.add('is-active');
         current = id;
       });
-    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
 
     sections.forEach(function (s) { spy.observe(s); });
   }
 
   /* ---------- Project filters ---------- */
-  var filters = Array.prototype.slice.call(document.querySelectorAll('.filter'));
-  var projects = Array.prototype.slice.call(document.querySelectorAll('#projectGrid .proj'));
+  var filters = Array.prototype.slice.call(document.querySelectorAll('.glass-filter'));
+  var projects = Array.prototype.slice.call(document.querySelectorAll('#projectGrid .proj-card'));
 
-  // Keep the counts on the filter chips in sync with the actual cards.
   filters.forEach(function (btn) {
     var cat = btn.getAttribute('data-filter');
-    var badge = btn.querySelector('[data-count]');
-    if (!badge) return;
-    badge.textContent = String(
-      cat === 'all'
-        ? projects.length
-        : projects.filter(function (c) { return c.getAttribute('data-cat') === cat; }).length
-    );
+    var badge = btn.querySelector('span');
+    if (badge) {
+      badge.textContent = String(
+        cat === 'all'
+          ? projects.length
+          : projects.filter(function (c) { return c.getAttribute('data-cat') === cat; }).length
+      );
+    }
   });
 
   filters.forEach(function (btn) {
     btn.addEventListener('click', function () {
       var cat = btn.getAttribute('data-filter');
-      filters.forEach(function (b) {
-        b.setAttribute('aria-pressed', String(b === btn));
-      });
+      filters.forEach(function (b) { b.classList.toggle('active', b === btn); });
       projects.forEach(function (card) {
         var show = cat === 'all' || card.getAttribute('data-cat') === cat;
         card.classList.toggle('is-hidden', !show);
@@ -129,70 +145,19 @@
     });
   });
 
-  /* ---------- Certificate lightbox ---------- */
-  var lightbox = document.getElementById('lightbox');
-  var lightboxImg = document.getElementById('lightboxImg');
-  var lightboxCap = document.getElementById('lightboxCap');
-  var lightboxClose = document.getElementById('lightboxClose');
-  var lastFocused = null;
+  /* ---------- Impact counter animation ---------- */
+  var impactNums = Array.prototype.slice.call(document.querySelectorAll('.impact-num[data-target]'));
 
-  function openLightbox(src, caption) {
-    if (!lightbox || !lightboxImg) return;
-    lastFocused = document.activeElement;
-    lightboxImg.src = src;
-    lightboxImg.alt = caption || 'Certificate';
-    if (lightboxCap) lightboxCap.textContent = caption || '';
-    lightbox.classList.add('is-open');
-    document.body.style.overflow = 'hidden';
-    if (lightboxClose) lightboxClose.focus();
-  }
-
-  function closeLightbox() {
-    if (!lightbox) return;
-    lightbox.classList.remove('is-open');
-    document.body.style.overflow = '';
-    if (lightboxImg) lightboxImg.src = '';
-    if (lastFocused && lastFocused.focus) lastFocused.focus();
-  }
-
-  Array.prototype.forEach.call(document.querySelectorAll('.cert-card'), function (card) {
-    card.addEventListener('click', function () {
-      openLightbox(card.getAttribute('data-full'), card.getAttribute('data-caption'));
-    });
-  });
-
-  if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
-  if (lightbox) {
-    lightbox.addEventListener('click', function (e) {
-      if (e.target === lightbox || e.target.classList.contains('lightbox__inner')) closeLightbox();
-    });
-  }
-  document.addEventListener('keydown', function (e) {
-    if (e.key !== 'Escape') return;
-    if (lightbox && lightbox.classList.contains('is-open')) closeLightbox();
-    else closeNav();
-  });
-
-  /* ---------- Impact counters ---------- */
-  var nums = Array.prototype.slice.call(document.querySelectorAll('.impact__num'));
-
-  if (!reduceMotion && 'IntersectionObserver' in window && nums.length) {
+  if (!reduceMotion && 'IntersectionObserver' in window && impactNums.length) {
     var countObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
         var el = entry.target;
         countObserver.unobserve(el);
 
-        // Animate only the leading numeric token, preserving all surrounding markup.
-        var html = el.innerHTML;
-        var match = html.match(/^(₹?)(\d+(?:\.\d+)?)/);
-        if (!match) return;
-
-        var prefix = match[1];
-        var target = parseFloat(match[2]);
-        var decimals = (match[2].split('.')[1] || '').length;
-        var rest = html.slice(match[0].length);
-        var duration = 1100;
+        var target = parseFloat(el.getAttribute('data-target'));
+        var decimals = (String(target).split('.')[1] || '').length;
+        var duration = 1400;
         var start = null;
 
         function step(ts) {
@@ -200,13 +165,67 @@
           var p = Math.min((ts - start) / duration, 1);
           var eased = 1 - Math.pow(1 - p, 3);
           var value = (target * eased).toFixed(decimals);
-          el.innerHTML = prefix + value + rest;
+          el.textContent = value;
           if (p < 1) requestAnimationFrame(step);
+          else el.textContent = target % 1 === 0 ? String(target) : target.toFixed(decimals);
         }
         requestAnimationFrame(step);
       });
     }, { threshold: 0.4 });
 
-    nums.forEach(function (n) { countObserver.observe(n); });
+    impactNums.forEach(function (n) { countObserver.observe(n); });
   }
+
+  /* ---------- Parallax tilt on glass cards ---------- */
+  if (!reduceMotion && window.innerWidth > 1024) {
+    var tiltCards = document.querySelectorAll('.glass-card');
+    tiltCards.forEach(function (card) {
+      card.addEventListener('mousemove', function (e) {
+        var rect = card.getBoundingClientRect();
+        var x = (e.clientX - rect.left) / rect.width - 0.5;
+        var y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = 'translateY(-4px) perspective(800px) rotateY(' + (x * 3) + 'deg) rotateX(' + (-y * 3) + 'deg)';
+      });
+      card.addEventListener('mouseleave', function () {
+        card.style.transform = '';
+      });
+    });
+  }
+
+  /* ---------- Typed text effect for hero (subtle) ---------- */
+  var heroTitle = document.querySelector('.hero-title');
+  if (heroTitle && !reduceMotion) {
+    heroTitle.style.opacity = '0';
+    heroTitle.style.transform = 'translateY(20px)';
+    heroTitle.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+    setTimeout(function () {
+      heroTitle.style.opacity = '1';
+      heroTitle.style.transform = 'translateY(0)';
+    }, 200);
+  }
+
+  /* ---------- Smooth section entrance with staggered children ---------- */
+  var statItems = document.querySelectorAll('.stat-item');
+  statItems.forEach(function (item, i) {
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(15px)';
+    item.style.transition = 'opacity 0.5s ease ' + (0.5 + i * 0.15) + 's, transform 0.5s ease ' + (0.5 + i * 0.15) + 's';
+    setTimeout(function () {
+      item.style.opacity = '1';
+      item.style.transform = 'translateY(0)';
+    }, 100);
+  });
+
+  /* ---------- Keyboard navigation ---------- */
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeNav();
+  });
+
+  /* ---------- Company logo error fallback styling ---------- */
+  document.querySelectorAll('.client-logo img, .proj-client-logo img, .tl-company-logo img').forEach(function (img) {
+    img.addEventListener('error', function () {
+      this.style.display = 'none';
+    });
+  });
+
 })();
